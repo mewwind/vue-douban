@@ -1,10 +1,7 @@
 <template>
 <div id="tab">
   <mu-drawer class="drawer" :open="open" :docked="docked" @close="toggle()">
-    <div class="drawer-pic">
-      <div class="title" style="font-size: 28px;">Web Douban</div>
-      <div class="description" style="font-size: 16px;color:white;">一个移动端豆瓣 Web 应用</div>
-    </div>
+    <description></description>
     <mu-list :value="value" @itemClick="docked ? '' : toggle()" @change="change">
       <mu-list-item value="movie" title="电影">
         <mu-icon slot="left" value="movie" />
@@ -24,6 +21,7 @@
   <mu-paper :class="{'main-container': true, 'nav-hide': !open}" :zDepth="2">
     <mu-appbar title="电影">
       <mu-icon-button slot="left" icon="menu" @click="toggle(true)"></mu-icon-button>
+      <mu-icon-button slot="right" icon="search" @click="gotoSearch()"></mu-icon-button>
     </mu-appbar>
     <mu-tabs :lineClass="lineClass" :value="activeTab" @change="handleTabChange">
       <mu-tab value="tab1" icon="movie" title="正在上映"/>
@@ -34,16 +32,18 @@
 </template>
 
 <script>
+import description from '../../components/Description'
 export default {
   data() {
     return {
-      value: "movie",
+      value: 'movie',
       open: false,
       docked: true,
       activeTab: 'tab1',
       lineClass: '#706f77'
     }
   },
+  components: {description},
   methods: {
     toggle(flag) {
       this.open = !this.open;
@@ -51,6 +51,17 @@ export default {
     },
     change(value) {
       this.value = value;
+      switch(value) {
+        case 'movie':
+          break;
+        case 'book':
+          break;
+        case 'music':
+          break;
+        case 'about':
+          this.$router.push({name: 'About'});
+          break;
+      }
     },
     handleTabChange(val) {
       this.activeTab = val
@@ -66,13 +77,7 @@ export default {
 }
 .drawer{
 	color: #212121;
-    background:#f5f5f5;
-}
-.drawer-pic{
-	background: #4fbfb5;
-	padding: 37px 0;
-	text-align: center;
-	color: white;
+  background:#f5f5f5;
 }
 .main-container{
   left: 256px;
