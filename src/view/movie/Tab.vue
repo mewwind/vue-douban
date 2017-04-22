@@ -18,36 +18,40 @@
       </mu-list-item>
     </mu-list>
   </mu-drawer>
-  <mu-paper :class="{'main-container': true, 'nav-hide': !open}" :zDepth="2">
+  <mu-paper :zDepth="2">
     <mu-appbar title="电影">
       <mu-icon-button slot="left" icon="menu" @click="toggle(true)"></mu-icon-button>
       <mu-icon-button slot="right" icon="search" @click="gotoSearch()"></mu-icon-button>
     </mu-appbar>
-    <mu-tabs :lineClass="lineClass" :value="activeTab" @change="handleTabChange">
-      <mu-tab value="tab1" icon="movie" title="正在上映"/>
-      <mu-tab value="tab2" icon="lightbulb_outline" title="即将上映..."/>
+    <mu-tabs :value="activeTab" @change="handleTabChange">
+      <mu-tab value="in_theaters" icon="movie" title="正在上映"/>
+      <mu-tab value="comming_soon" icon="lightbulb_outline" title="即将上映..."/>
     </mu-tabs>
 		</mu-paper>
 	</div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import description from '../../components/Description'
+import * as type from '../../store/mutation-types'
+
 export default {
   data() {
     return {
       value: 'movie',
       open: false,
-      docked: true,
-      activeTab: 'tab1',
-      lineClass: '#706f77'
+      docked: true
     }
   },
+  computed: mapState({
+    activeTab : state=>state.movie.tab
+  }),
   components: {description},
   methods: {
     toggle(flag) {
       this.open = !this.open;
-      this.docked = !!flag;
+      this.docked = !flag;
     },
     change(value) {
       this.value = value;
@@ -64,7 +68,7 @@ export default {
       }
     },
     handleTabChange(val) {
-      this.activeTab = val
+      this.$store.dispatch(type.CHANGE_MOVIES_TAB, val)
     }
   }
 }
@@ -78,13 +82,6 @@ export default {
 .drawer{
 	color: #212121;
   background:#f5f5f5;
-}
-.main-container{
-  left: 256px;
-  position: relative;
-}
-.main-container.nav-hide{
-  left: 0px;
 }
 @media (max-width: 993px) {
   .main-container{

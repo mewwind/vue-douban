@@ -1,0 +1,1 @@
+export const CHANGE_MOVIES_TAB = "CHANGE_MOVIES_TAB"
