@@ -1,8 +1,8 @@
 <template>
 	<div>
   <mu-card>
-    <mu-card-media title="Web Douban" subTitle="一个移动端豆瓣 Web 应用" subTitleClass="subTitleClass">
-      <img src="/static/img/design.jpg"/>
+    <mu-card-media title="Web Douban" subTitle="一个移动端的豆瓣应用" subTitleClass="subTitleClass">
+      <img src="https://img3.doubanio.com/img/celebrity/large/17525.jpg"/>
     </mu-card-media>
   </mu-card>
   </div>

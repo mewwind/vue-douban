@@ -2,7 +2,7 @@
 <div id="tab">
   <mu-drawer class="drawer" :open="open" :docked="docked" @close="toggle()">
     <description></description>
-    <mu-list :value="value" @itemClick="docked ? '' : toggle()" @change="change">
+    <mu-list :value="value" @itemClick="docked ? '' : toggle()" @change="itemChange">
       <mu-list-item value="movie" title="电影">
         <mu-icon slot="left" value="movie" />
       </mu-list-item>
@@ -23,17 +23,19 @@
       <mu-icon-button slot="left" icon="menu" @click="toggle(true)"></mu-icon-button>
       <mu-icon-button slot="right" icon="search" @click="gotoSearch()"></mu-icon-button>
     </mu-appbar>
-    <mu-tabs :value="activeTab" @change="handleTabChange">
+    <mu-tabs :value="activeTab" @change="tabChange">
       <mu-tab value="in_theaters" icon="movie" title="正在上映"/>
       <mu-tab value="comming_soon" icon="lightbulb_outline" title="即将上映..."/>
     </mu-tabs>
-		</mu-paper>
+	</mu-paper>
+  <movie-list :tab-name="activeTab"></movie-list>
 	</div>
 </template>
 
 <script>
 import {mapState} from 'vuex'
 import description from '../../components/Description'
+import MovieList from './MovieList'
 import * as type from '../../store/mutation-types'
 
 export default {
@@ -47,13 +49,16 @@ export default {
   computed: mapState({
     activeTab : state=>state.movie.tab
   }),
-  components: {description},
+  components: {
+    description,
+    "movie-list": MovieList,
+  },
   methods: {
     toggle(flag) {
       this.open = !this.open;
       this.docked = !flag;
     },
-    change(value) {
+    itemChange(value) {
       this.value = value;
       switch(value) {
         case 'movie':
@@ -67,7 +72,7 @@ export default {
           break;
       }
     },
-    handleTabChange(val) {
+    tabChange(val) {
       this.$store.dispatch(type.CHANGE_MOVIES_TAB, val)
     }
   }

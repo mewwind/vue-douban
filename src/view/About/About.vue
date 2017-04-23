@@ -13,19 +13,21 @@
         It gives you a brief description for movie, books and music.
         For more code infomation, please refer to the following github.
       </mu-card-text>
-      <mu-card-actions>
-        <a href="https://github.com/mewwind/vue-douban/" target="_Blank">
-          <img class="github" src="/static/img/github.png" />
-        </a>
-      </mu-card-actions>
     </mu-card>
-    <mu-divider /> 
+      <mu-raised-button class="github-button" href="https://github.com/mewwind/vue-douban/" label="vue-douban" labelPosition="after" fullWidth>
+      <img class="github-img" src="/static/img/github.png"/>
+    </mu-raised-button>
 
   </div>
 </template>
 <script>
   import description from "../../components/Description"
   export default{
+    data() {
+      return {
+        fullWidth: true
+      }
+    },
     name: 'About',
     components: {description},
     methods: {
@@ -39,9 +41,8 @@
   .action{
     width:100%;
   }
-  .github{
+  .github-img{
     display:block;
-    margin:auto;
     width:25px;
   }
 </style>
