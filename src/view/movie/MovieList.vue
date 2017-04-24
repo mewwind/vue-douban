@@ -6,9 +6,9 @@
           <mu-card-media>
             <img :src="subject.images.large"/>
           </mu-card-media>
-          <mu-card-title :title="subject.title"/>
-          <span v-if="subject.rating.average>0">
-            <star-rating :stars="subject.rating.stars" :rating="subject.rating.average"></star-rating>
+          <mu-card-title :title="subject.title" titleClass="card-title"/>
+          <span class="star-rating" v-if="subject.rating.average>0">
+            <star-rating :stars="subject.rating.stars" :rating="subject.rating.average" :max="subject.rating.max"></star-rating>
           </span>
           <span v-else>暂无评分</span>
         </mu-card>
@@ -44,8 +44,21 @@
         }
       }
     }
-  } 
+  }
 </script>
 <style type="text/css">
-  
+  .mu-card div.card-title{
+    font-size:14px;
+    line-height:15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-top: 5px;
+  }
+  .mu-card .mu-card-title-container{
+    padding:2px;
+  }
+  .mu-card {
+    padding:5px;
+  }
 </style>

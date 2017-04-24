@@ -88,9 +88,4 @@ export default {
 	color: #212121;
   background:#f5f5f5;
 }
-@media (max-width: 993px) {
-  .main-container{
-    left: 0;
-  }
-}
 </style>
