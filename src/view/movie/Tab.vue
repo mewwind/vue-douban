@@ -30,7 +30,7 @@
 	</mu-paper>
   <movie-list :tab-name="activeTab"></movie-list>
   <div class="loading" v-show="isLoading">
-    <mu-circular-progress :size="40"/>
+    <mu-circular-progress class="progress" :size="40"/>
   </div>
 	</div>
 </template>
@@ -83,13 +83,17 @@ export default {
 }
 </script>
 <style lang="css">
-#tab{
-	width:100%;
-	height: 100%;
-  transition: all .45s cubic-bezier(.23,1,.32,1);
-}
-.drawer{
-	color: #212121;
-  background:#f5f5f5;
-}
+  #tab{
+  	width:100%;
+  	height: 100%;
+    transition: all .45s cubic-bezier(.23,1,.32,1);
+  }
+  .drawer{
+  	color: #212121;
+    background:#f5f5f5;
+  }
+  #tab .progress{
+    margin:30px auto;
+    display:block;
+  }
 </style>

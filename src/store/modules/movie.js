@@ -7,7 +7,9 @@ const mutations = {
   },
   [type.FETCH_MOVIES](state, payload) {
     state[payload.type].subjects = payload.subjects;
-    state.isLoading = false;
+  },
+  [type.CHANGE_LOADING_STATUS](state, payload) {
+    state.isLoading = payload.isLoading;
   }
 }
 const actions = {
@@ -15,11 +17,15 @@ const actions = {
     context.commit(type.CHANGE_MOVIES_TAB, tab)
   },
   [type.FETCH_MOVIES](context, payload) {
+    context.commit(type.CHANGE_LOADING_STATUS, {isLoading: true});
     api.fetchMovies(payload.type)
-      .then(data => context.commit(type.FETCH_MOVIES, {
+      .then(data => {
+        context.commit(type.FETCH_MOVIES, {
           type: payload.type,
           subjects: data.subjects
-      }))
+        });
+        context.commit(type.CHANGE_LOADING_STATUS, {isLoading: false});
+      })
   }
 }
 
