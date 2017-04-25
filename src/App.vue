@@ -1,12 +1,17 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <copyright></copyright>
   </div>
 </template>
 
 <script>
+import copyright from './view/Copyright'
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    copyright
+  }
 }
 </script>
 

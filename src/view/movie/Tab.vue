@@ -25,10 +25,13 @@
     </mu-appbar>
     <mu-tabs :value="activeTab" @change="tabChange">
       <mu-tab value="in_theaters" icon="movie" title="正在上映"/>
-      <mu-tab value="comming_soon" icon="lightbulb_outline" title="即将上映..."/>
+      <mu-tab value="coming_soon" icon="lightbulb_outline" title="即将上映..."/>
     </mu-tabs>
 	</mu-paper>
   <movie-list :tab-name="activeTab"></movie-list>
+  <div class="loading" v-show="isLoading">
+    <mu-circular-progress :size="40"/>
+  </div>
 	</div>
 </template>
 
@@ -47,7 +50,8 @@ export default {
     }
   },
   computed: mapState({
-    activeTab : state=>state.movie.tab
+    activeTab : state=>state.movie.tab,
+    isLoading : state=>state.movie.isLoading
   }),
   components: {
     description,

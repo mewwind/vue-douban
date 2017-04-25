@@ -6,7 +6,8 @@ const mutations = {
     state.tab = tab;
   },
   [type.FETCH_MOVIES](state, payload) {
-    state[payload.type].subjects = payload.subjects
+    state[payload.type].subjects = payload.subjects;
+    state.isLoading = false;
   }
 }
 const actions = {
@@ -32,6 +33,7 @@ export default {
     'coming_soon': {
       subjects: []
     },
-    tab: 'in_theaters'
+    'isLoading': false,
+    'tab': 'in_theaters'
   }
 }

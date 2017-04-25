@@ -1,10 +1,9 @@
 <template>
   <div class="wrapper">
     <mu-row>
-      <mu-col width="33" tablet="25" desktip="20" v-for="subject in subjects">
+      <mu-col width="33" tablet="25" desktop="20" v-for="subject in subjects">
         <mu-card>
-          <mu-card-media>
-            <img :src="subject.images.large"/>
+          <mu-card-media :style="'background-image: url('+subject.images.large+')'">
           </mu-card-media>
           <mu-card-title :title="subject.title" titleClass="card-title"/>
           <span class="star-rating" v-if="subject.rating.average>0">
@@ -27,6 +26,9 @@
     props: ['tabName'],
     watch: {
       "$route" : "fetchData"
+    },
+    beforeUpdate() {
+      this.fetchData()
     },
     computed: mapState({
       subjects(state) {
@@ -58,7 +60,15 @@
   .mu-card .mu-card-title-container{
     padding:2px;
   }
-  .mu-card {
-    padding:5px;
+  .wrapper .mu-card {
+    margin:5px;
+  }
+  .wrapper .mu-card-media{
+    width:100%;
+    background-size:cover;
+    padding-top:140%;
+  }
+  .wrapper .row{
+    justify-content: flex-start;
   }
 </style>
