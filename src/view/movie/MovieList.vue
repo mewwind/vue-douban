@@ -2,6 +2,7 @@
   <div class="wrapper">
     <mu-row>
       <mu-col width="33" tablet="25" desktop="20" v-for="subject in subjects">
+      <router-link :to="{name: 'MovieSubject', params: {id: subject.id}}">
         <mu-card>
           <mu-card-media :style="'background-image: url('+subject.images.large+')'">
           </mu-card-media>
@@ -11,6 +12,7 @@
           </span>
           <span v-else>暂无评分</span>
         </mu-card>
+      </router-link>
       </mu-col>
     </mu-row>
   </div>
@@ -20,12 +22,21 @@
   import * as type from '../../store/mutation-types';
   import star from '../../components/Star';
   export default {
+    data() {
+      return {
+        transitionName: 'slide-left'
+      }
+    },
     created() {
       this.fetchData()
     },
     props: ['tabName'],
     watch: {
-      "$route" : "fetchData"
+      "$route"(to, from) {
+        const toDepth = to.path.split('/').length
+        const fromDepth = from.path.split('/').length
+        this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+      }
     },
     beforeUpdate() {
       this.fetchData()
