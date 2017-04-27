@@ -13,6 +13,8 @@ Vue.config.productionTip = false
 
 Vue.use(MuseUI);
 
+Vue.filter('arr2string', value => value.join(' / '));
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -8,6 +8,9 @@ const mutations = {
   [type.FETCH_MOVIES](state, payload) {
     state[payload.type].subjects = payload.subjects;
   },
+  [type.FETCH_MOVIE_SUBJECT](state, payload) {
+    state.subjects[payload.id] = payload.subject;
+  },
   [type.CHANGE_LOADING_STATUS](state, payload) {
     state.isLoading = payload.isLoading;
   }
@@ -26,6 +29,15 @@ const actions = {
         });
         context.commit(type.CHANGE_LOADING_STATUS, {isLoading: false});
       })
+  },
+  [type.FETCH_MOVIE_SUBJECT](context, payload) {
+    api.fetchMovieSubject(payload.id)
+      .then(data => {
+        context.commit(type.FETCH_MOVIE_SUBJECT, {
+          id: payload.id,
+          subject: data
+        });
+      })
   }
 }
 
@@ -40,6 +52,7 @@ export default {
       subjects: []
     },
     'isLoading': false,
-    'tab': 'in_theaters'
+    'tab': 'in_theaters',
+    'subjects': {}
   }
 }
