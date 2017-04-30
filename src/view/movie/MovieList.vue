@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <mu-row>
-      <mu-col width="33" tablet="25" desktop="20" v-for="subject in subjects">
+      <mu-col width="33" tablet="25" desktop="20" v-for="subject in subjects" :key="subject.id">
       <router-link :to="{name: 'MovieSubject', params: {id: subject.id}}">
         <mu-card>
           <mu-card-media :style="'background-image: url('+subject.images.large+')'">

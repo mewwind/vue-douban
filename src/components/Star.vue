@@ -1,9 +1,9 @@
 <template>
   <div id="star-container">
   <span class="star">
-    <mu-icon value="star" v-for="n in starObj.stars"/>
-    <mu-icon value="star_half" v-for="n in starObj.half"/>
-    <mu-icon value="star_border" v-for="n in starObj.empty"/>
+    <mu-icon value="star" v-for="n in starObj.stars" :key="n"/>
+    <mu-icon value="star_half" v-for="n in starObj.half" :key="n"/>
+    <mu-icon value="star_border" v-for="n in starObj.empty" :key="n"/>
   </span>
   <span>{{rating}}</span>
 </div>

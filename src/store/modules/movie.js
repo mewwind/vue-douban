@@ -33,6 +33,9 @@ const actions = {
   [type.FETCH_MOVIE_SUBJECT](context, payload) {
     api.fetchMovieSubject(payload.id)
       .then(data => {
+        if (payload.callback) {
+          payload.callback();
+        }
         context.commit(type.FETCH_MOVIE_SUBJECT, {
           id: payload.id,
           subject: data

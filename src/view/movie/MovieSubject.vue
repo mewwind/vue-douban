@@ -10,7 +10,6 @@
         </div>
         <div class="title-text">
           <p>{{movie.title}}</p>
-          <p>{{movie.rating.average}}</p>
         </div>
       </div>
     </div>
@@ -69,34 +68,35 @@
 </template>
 <script type="text/javascript">
   import {mapState} from 'vuex';
+  import store from '../../store/index';
+  import router from '../../router';
   import star from '../../components/Star';
   import * as type from '../../store/mutation-types';
   export default{
-    created() {
-      this.fetchData()
+    beforeRouteEnter (to, from, next) {
+      const id = to.params.id;
+      const subject = store.state.movie.subjects[id];
+      if (!subject) {
+        store.dispatch(type.FETCH_MOVIE_SUBJECT, {id: id, callback: function() {
+          next();
+        }})
+      } else {
+        next();
+      }
     },
     computed: mapState({
       movie(state) {
         return state.movie.subjects[this.$route.params.id]
       }
     }),
+    methods: {
+      goBack() {
+        router.go(-1)
+      }
+    },
     components: {
       "star-rating": star
-    },
-    watch: {
-      $route: 'fetchData'
-    },
-    methods: {
-      fetchData() {
-        const id = this.$route.params.id;
-        const subject = this.$store.state.movie.subjects[id];
-        console.log('subject' + subject);
-        if (!subject) {
-          this.$store.dispatch(type.FETCH_MOVIE_SUBJECT, {id: id})
-        }
-      }
     }
-
   }
 </script>
 <style lang="css" scoped>
