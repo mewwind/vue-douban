@@ -14,22 +14,20 @@
       </div>
     </div>
 
-    <div class="star">
       <span class="star-rating" v-if="movie.rating.average>0">
-        <star-rating :stars="movie.rating.stars" :rating="movie.rating.average" :max="movie.rating.max"></star-rating>
+        <star-rating :stars="movie.rating.stars" :rating="movie.rating.average" :max="movie.rating.max" :size="42"></star-rating>
       </span>
-    </div>
     <div class="info">
-      <p class="info-content"><span class="info-title">原名</span><span class="info-text">{{movie.original_title}}</span></p>
-      <p class="info-content"><span class="info-title">类型</span><span class="info-text">{{movie.genres | arr2string}}</span></p>
-      <p class="info-content"><span class="info-title">年代</span><span class="info-text">{{movie.year}}</span></p>
-      <p class="info-content"><span class="info-title">地区</span><span class="info-text">{{movie.countries | arr2string}}</span></p>
-      <p class="info-content"><span class="info-title">又名</span><span class="info-text">{{movie.aka | arr2string}}</span></p>
-      <p class="info-content"><span class="info-title">想看人数</span><span class="info-text">{{movie.wish_count}}</span></p>
-      <p class="info-content"><span class="info-title">看过人数</span><span class="info-text">{{movie.collect_count}}</span></p>
-      <p class="info-content"><span class="info-title">评分人数</span><span class="info-text">{{movie.ratings_count}}</span></p>
-      <p class="info-content"><span class="info-title">短评数量</span><span class="info-text">{{movie.comments_count}}</span></p>
-      <p class="info-content"><span class="info-title">影评数量</span><span class="info-text">{{movie.reviews_count}}</span></p>
+      <p class="info-content"><span>原名</span><span class="info-text">{{movie.original_title}}</span></p>
+      <p class="info-content"><span>类型</span><span class="info-text">{{movie.genres | arr2string}}</span></p>
+      <p class="info-content"><span>年代</span><span class="info-text">{{movie.year}}</span></p>
+      <p class="info-content"><span>地区</span><span class="info-text">{{movie.countries | arr2string}}</span></p>
+      <p class="info-content"><span>又名</span><span class="info-text">{{movie.aka | arr2string}}</span></p>
+      <p class="info-content"><span>想看人数</span><span class="info-text">{{movie.wish_count}}</span></p>
+      <p class="info-content"><span>看过人数</span><span class="info-text">{{movie.collect_count}}</span></p>
+      <p class="info-content"><span>评分人数</span><span class="info-text">{{movie.ratings_count}}</span></p>
+      <p class="info-content"><span>短评数量</span><span class="info-text">{{movie.comments_count}}</span></p>
+      <p class="info-content"><span>影评数量</span><span class="info-text">{{movie.reviews_count}}</span></p>
     </div>
     <div class="summary">{{movie.summary}}</div>
     <div class="author">
@@ -69,7 +67,6 @@
 <script type="text/javascript">
   import {mapState} from 'vuex';
   import store from '../../store/index';
-  import router from '../../router';
   import star from '../../components/Star';
   import * as type from '../../store/mutation-types';
   export default{
@@ -91,7 +88,7 @@
     }),
     methods: {
       goBack() {
-        router.go(-1)
+        this.$router.go(-1)
       }
     },
     components: {
@@ -141,7 +138,7 @@
   padding-left: 15px;
   margin: 0;
 }
-.star{
+.star-rating{
   display: flex;
   justify-content: center;
   background: #eee;

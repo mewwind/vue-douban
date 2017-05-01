@@ -8,7 +8,7 @@
           </mu-card-media>
           <mu-card-title :title="subject.title" titleClass="card-title"/>
           <span class="star-rating" v-if="subject.rating.average>0">
-            <star-rating :stars="subject.rating.stars" :rating="subject.rating.average" :max="subject.rating.max"></star-rating>
+            <star-rating :size="13" :stars="subject.rating.stars" :rating="subject.rating.average" :max="subject.rating.max"></star-rating>
           </span>
           <span v-else>暂无评分</span>
         </mu-card>

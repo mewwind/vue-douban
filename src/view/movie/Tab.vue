@@ -78,6 +78,9 @@ export default {
     },
     tabChange(val) {
       this.$store.dispatch(type.CHANGE_MOVIES_TAB, val)
+    },
+    gotoSearch() {
+      this.$router.push({name: 'SearchMovie'})
     }
   }
 }

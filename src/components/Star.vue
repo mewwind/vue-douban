@@ -1,16 +1,16 @@
 <template>
   <div id="star-container">
   <span class="star">
-    <mu-icon value="star" v-for="n in starObj.stars" :key="n"/>
-    <mu-icon value="star_half" v-for="n in starObj.half" :key="n"/>
-    <mu-icon value="star_border" v-for="n in starObj.empty" :key="n"/>
+    <mu-icon value="star" v-for="n in starObj.stars" :key="n" :size="size"/>
+    <mu-icon value="star_half" v-for="n in starObj.half" :key="n" :size="size"/>
+    <mu-icon value="star_border" v-for="n in starObj.empty" :key="n" :size="size"/>
   </span>
   <span>{{rating}}</span>
 </div>
 </template>
 <script type="text/javascript">
   export default {
-    props: ["stars", "rating", "max"],
+    props: ["size", "stars", "rating", "max"],
     computed: {
       starObj() {
         const stars = Math.floor(parseInt(this.stars) / 10)
@@ -34,7 +34,6 @@
   }
   .star .mu-icon{
     letter-spacing: -3px;
-    font-size: 13px;
     color: orange;
   }
 </style>
