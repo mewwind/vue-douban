@@ -2,17 +2,17 @@
   <div class="wrapper">
     <mu-row>
       <mu-col width="33" tablet="25" desktop="20" v-for="subject in subjects" :key="subject.id">
-      <router-link :to="{name: 'MovieSubject', params: {id: subject.id}}">
-        <mu-card>
-          <mu-card-media :style="'background-image: url('+subject.images.large+')'">
-          </mu-card-media>
-          <mu-card-title :title="subject.title" titleClass="card-title"/>
-          <span class="star-rating" v-if="subject.rating.average>0">
-            <star-rating :size="13" :stars="subject.rating.stars" :rating="subject.rating.average" :max="subject.rating.max"></star-rating>
-          </span>
-          <span v-else>暂无评分</span>
-        </mu-card>
-      </router-link>
+        <router-link :to="{name: 'MovieSubject', params: {id: subject.id}}">
+          <mu-card>
+            <mu-card-media :style="'background-image: url('+subject.images.large+')'">
+            </mu-card-media>
+            <mu-card-title :title="subject.title" titleClass="card-title"/>
+            <span class="star-rating" v-if="subject.rating.average>0">
+              <star-rating :size="13" :stars="subject.rating.stars" :rating="subject.rating.average" :max="subject.rating.max"></star-rating>
+            </span>
+            <span v-else>暂无评分</span>
+          </mu-card>
+        </router-link>
       </mu-col>
     </mu-row>
   </div>

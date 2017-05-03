@@ -2,24 +2,28 @@ import * as type from '../mutation-types'
 import * as api from './api'
 
 const mutations = {
-  [type.CHANGE_MOVIES_TAB](state, tab) {
+  [type.CHANGE_MOVIES_TAB] (state, tab) {
     state.tab = tab;
   },
-  [type.FETCH_MOVIES](state, payload) {
+  [type.FETCH_MOVIES] (state, payload) {
     state[payload.type].subjects = payload.subjects;
   },
-  [type.FETCH_MOVIE_SUBJECT](state, payload) {
+  [type.FETCH_MOVIE_SUBJECT] (state, payload) {
     state.subjects[payload.id] = payload.subject;
   },
-  [type.CHANGE_LOADING_STATUS](state, payload) {
+  [type.CHANGE_LOADING_STATUS] (state, payload) {
     state.isLoading = payload.isLoading;
+  },
+  [type.QUERY_MOVIES] (state, payload) {
+    state.query.text = payload.name;
+    state.query.subjects = payload.subjects;
   }
 }
 const actions = {
-  [type.CHANGE_MOVIES_TAB](context, tab) {
+  [type.CHANGE_MOVIES_TAB] (context, tab) {
     context.commit(type.CHANGE_MOVIES_TAB, tab)
   },
-  [type.FETCH_MOVIES](context, payload) {
+  [type.FETCH_MOVIES] (context, payload) {
     context.commit(type.CHANGE_LOADING_STATUS, {isLoading: true});
     api.fetchMovies(payload.type)
       .then(data => {
@@ -30,7 +34,7 @@ const actions = {
         context.commit(type.CHANGE_LOADING_STATUS, {isLoading: false});
       })
   },
-  [type.FETCH_MOVIE_SUBJECT](context, payload) {
+  [type.FETCH_MOVIE_SUBJECT] (context, payload) {
     api.fetchMovieSubject(payload.id)
       .then(data => {
         if (payload.callback) {
@@ -40,6 +44,15 @@ const actions = {
           id: payload.id,
           subject: data
         });
+      })
+  },
+  [type.QUERY_MOVIES] (context, payload) {
+    api.queryMovie(payload.name)
+      .then(data => {
+        context.commit(type.QUERY_MOVIES, {
+          name: payload.name,
+          subjects: data.subjects
+        })
       })
   }
 }
@@ -56,6 +69,10 @@ export default {
     },
     'isLoading': false,
     'tab': 'in_theaters',
-    'subjects': {}
+    'subjects': {},
+    'query': {
+      'subjects': [],
+      'text': ''
+    }
   }
 }
