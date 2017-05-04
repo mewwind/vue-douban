@@ -14,8 +14,8 @@
           </div>
           <div v-else>暂无评分</div>
           <div>类型：{{subject.genres | arr2string}}</div>
-          <div>导演：{{subject.directors.map(e=>e.name) | arr2string}}</div>
-          <div>主演：{{subject.casts.map(e=>e.name) | arr2string}}</div>
+          <div class="line-limit-1">导演：{{subject.directors.map(e=>e.name) | arr2string}}</div>
+          <div class="line-limit-2">主演：{{subject.casts.map(e=>e.name) | arr2string}}</div>
         </div>
       </mu-paper>
     </router-link>
@@ -38,12 +38,29 @@
       .card-image {
         flex:1;
         background-size:cover;
-        width:1px;
+        padding-top:42%;
       }
       .description {
         flex:2;
         padding:10px;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
       }
     }
+  }
+  .line-limit{
+    text-overflow:ellipsis;
+    overflow:hidden;
+  }
+  .line-limit-1 {
+    .line-limit();
+    white-space:nowrap;
+  }
+  .line-limit-2 {
+    .line-limit();
+    display: -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient: vertical;
   }
 </style>
