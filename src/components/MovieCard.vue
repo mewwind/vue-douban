@@ -38,7 +38,7 @@
       .card-image {
         flex:1;
         background-size:cover;
-        padding-top:42%;
+        padding-top:45%;
       }
       .description {
         flex:2;
@@ -46,6 +46,7 @@
         display:flex;
         flex-direction:column;
         justify-content:center;
+        min-width:0;
       }
     }
   }

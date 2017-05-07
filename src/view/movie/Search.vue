@@ -37,7 +37,6 @@
         this.$router.go(-1);
       },
       searchq() {
-        console.log('aaa');
         this.$router.push({name: 'SearchMovie', query: {name: this.q}});
       },
       queryMovie() {
@@ -48,19 +47,22 @@
 </script>
 <style lang="less">
 .bar-text{
-    font-size: 16px;
-    height: 100%;
+    font-size: 2rem;
+    line-height: 1;
     position: relative;
     margin-bottom: 0px;
     border: none;
     background-color: transparent;
     -moz-appearance: none;
     -webkit-appearance: none;
+    width:100%;
+    color:white;
     &:focus{
       border: none;
       -moz-appearance: none;
       -webkit-appearance: none;
       outline: none;
+      border-bottom: solid 2px white;
     }
 }
 .appbar-search-field{
